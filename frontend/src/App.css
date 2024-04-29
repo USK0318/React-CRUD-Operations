@@ -1,0 +1,41 @@
+/* StudentList.css */
+
+.table-container {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 70%; /* Adjust width as needed */
+    margin: 20px auto; /* Center the container horizontally */
+  }
+  
+  .table-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .table-container table {
+    width: 100%; /* Table fills the container width */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-container th,
+  .table-container td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table-container th {
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  .table-container tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .table-container tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
