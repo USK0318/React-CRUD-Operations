@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Studentsget from './Components/Studentsget';
 import Studentspost from './Components/Studentspost';
+import Dashboard from './Components/Dashboard';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Studentsget />} />
         <Route path="/post" element={<Studentspost />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       </div>
     </>

@@ -10,7 +10,7 @@ const Studentsget = () => {
 
   // Function to fetch students data
   const fetchStudents = () => {
-    
+
     fetch('http://127.0.0.1:8000/studentsget/')
       .then(response => response.json())
       .then(data => setStudents(data))
@@ -136,8 +136,23 @@ const Studentsget = () => {
       >
         Add Student
       </button>
+      <button
+        style={{
+          marginTop: '20px',
+          marginLeft: '50px',
+          padding: '10px',
+          fontSize: '16px',
+          cursor: 'pointer',
+          backgroundColor: 'green',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px'
+        }}
+        onClick={() => window.location.href = '/dashboard'}
+      >
+        Dashboard
+      </button>
 
-      {/* Modal for editing student */}
       <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
   {editedStudent && (
     <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto', backgroundColor: '#f9f9f9', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
