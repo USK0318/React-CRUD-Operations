@@ -43,3 +43,71 @@ def student_delete(request, pk):
         return Response(status=status.HTTP_200_OK)
     except Exception:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+import json
+
+@api_view(['GET'])
+def telugu_students(request):
+    students = Students.objects.filter()
+    name=[]
+    marks=[]    
+    for student in students:
+        name.append(student.name)
+        marks.append(student.telugu)
+    data = {
+        "name": name,
+        "marks": marks
+    }
+    output=[data]
+    return Response(output)
+
+@api_view(['GET'])
+def highest_marks(request):
+    students = Students.objects.filter()
+    name=[]
+    marks=[]    
+    for student in students:
+        name.append(student.name)
+        marks.append(student.telugu+student.hindi+student.english+student.maths+student.science)
+    data = {
+        "name": name,
+        "marks": marks
+    }
+    output=[data]
+    return Response(output)
+
+from django.db.models import Count
+
+@api_view(['GET'])
+def city_students(request):
+    name=[]
+    marks=[]
+    city_groups = (
+        Students.objects
+        .values('city')  # Group by city
+        .annotate(num_students=Count('roll'))  # Count number of students in each city
+        .order_by('city')  # Optionally, order the results by city name
+    )
+
+    for group in city_groups:
+        name.append(group['city'])
+        marks.append(group['num_students'])
+    data = {
+        "name": name,
+        "marks": marks
+    }
+    output=[data]
+    return Response(output)
+
+from .models import Students
+
+@api_view(['GET'])
+def krishna_students(request):
+    students = Students.objects.filter(roll=3)
+    name=['english','maths','science','hindi','telugu']
+    marks=[students[0].english,students[0].maths,students[0].science,students[0].hindi,students[0].telugu]
+    data = {
+        "name": name,
+        "marks": marks
+    }  
+    return Response(data)

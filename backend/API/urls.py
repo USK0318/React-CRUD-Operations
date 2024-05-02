@@ -6,4 +6,8 @@ urlpatterns = [
     path('studentedit/<int:pk>/', views.student_edit),
     path('studentdelete/<int:pk>/', views.student_delete),
     path('studentpost/', views.student_post),
+    path('telugustudents/', views.telugu_students),
+    path('highmarks/', views.highest_marks),
+    path('citystudents/', views.city_students),
+    path('krishna/', views.krishna_students),
 ]
