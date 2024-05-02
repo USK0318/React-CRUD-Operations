@@ -111,3 +111,34 @@ def krishna_students(request):
         "marks": marks
     }  
     return Response(data)
+
+@api_view(['GET'])
+def topper(request):
+    students = Students.objects.filter()
+    name=[]
+    marks=[]    
+    for student in students:
+        name.append(student.name)
+        marks.append(student.telugu+student.hindi+student.english+student.maths+student.science)
+    data = {
+        "name": name,
+        "marks": marks
+    }
+    output=[data]
+    return Response(output)
+
+@api_view(['GET'])
+def fail(request):
+    students = Students.objects.filter()
+    p=0
+    f=0
+    for student in students:
+        if (student.telugu+student.hindi+student.english+student.maths+student.science)>75:
+              p+=1
+        else:
+            f+=1
+    data = {
+        "pass":[p,f]
+    }
+    output=data
+    return Response(output)

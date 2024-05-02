@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
-const Passfail = () => {
+const PassFail = () => {
+  const [passFailData, setPassFailData] = useState([]);
+
+  useEffect(() => {
+    const fetchPassFailData = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/fail/');
+        const data = await response.json();
+
+        // Assuming the API response is like { "pass": [5, 2] }
+        setPassFailData(data.pass);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchPassFailData();
+  }, []);
+
   const options = {
     labels: ['Pass', 'Failed'],
-    series: [80, 20],
+    series: passFailData, // Use the fetched passFailData here
     chart: {
       type: 'donut',
     },
@@ -25,10 +43,10 @@ const Passfail = () => {
 
   return (
     <div>
-        <h2>Pass Failed</h2>
+      <h2>Pass Failed</h2>
       <Chart options={options} series={options.series} type="donut" height={400} />
     </div>
   );
 };
 
-export default Passfail;
+export default PassFail;

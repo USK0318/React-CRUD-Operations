@@ -10,4 +10,6 @@ urlpatterns = [
     path('highmarks/', views.highest_marks),
     path('citystudents/', views.city_students),
     path('krishna/', views.krishna_students),
+    path('topper/', views.topper),
+    path('fail/', views.fail),
 ]

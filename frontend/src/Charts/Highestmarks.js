@@ -36,7 +36,7 @@ const Highestmarks = () => {
         },
         series: [
             {
-                name: 'Sales',
+                name: 'Highestmarks',
                 data: studentsData.map(student => student.marks),
             },
         ],
