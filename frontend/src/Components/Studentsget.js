@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit ,faChartPie } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-modal'; // Import a modal library
 
 const Studentsget = () => {
@@ -91,6 +91,7 @@ const Studentsget = () => {
             <th>Telugu</th>
             <th>City</th>
             <th>Actions</th>
+            <th>Dashboard</th>
           </tr>
         </thead>
         <tbody>
@@ -117,6 +118,14 @@ const Studentsget = () => {
                   style={{ cursor: 'pointer', color: 'red', marginLeft: '10px' }}
                 />
               </td>
+              <td>
+                <FontAwesomeIcon
+                  icon={faChartPie}
+                  onClick={() => window.location.href = '/dashboard'}
+                  style={{ cursor: 'pointer', color: 'green', marginLeft: '30px' }}
+                />
+              </td>
+
             </tr>
           ))}
         </tbody>

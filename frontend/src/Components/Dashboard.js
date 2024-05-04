@@ -25,6 +25,7 @@ function Dashboard() {
 
   return (
     <div style={containerStyle}>
+      <h1 style={{ textAlign: 'center', width: '100%' }}>Students Dashboard</h1>
       {/* Telugu Chart Card */}
       <div style={cardStyle}>
         <Telugu />
