@@ -33,6 +33,7 @@ function Dashboard() {
 
       {/* Highest Marks Chart Card */}
       <div style={cardStyle}>
+      <h2>Highestmarks Chart</h2>
         <Highestmarks />
       </div>
 

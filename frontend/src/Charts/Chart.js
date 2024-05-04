@@ -1,20 +1,21 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Highestmarks from './Highestmarks';
+import Passfail from './Passfail';
+import Krishna from './Krishna';
 
 const Chart = () => {
     const containerStyle = {
         display: 'flex',
-        justifyContent: 'space-between', // Adjust as needed (e.g., 'space-around', 'center')
-        flexWrap: 'wrap',
+        justifyContent: 'center', // Center align items horizontally
+        alignItems: 'center', // Center align items vertically
+        height: '100vh', // Adjust height as needed
     };
     
     const cardStyle = {
-        width: '1000px', // Increase width of the card
+        width: '900px', // Set the width of each card
         border: '1px solid #ccc',
         borderRadius: '8px',
-        padding: '20px', // Increase padding inside the card
-        margin: '20px',
+        padding: '20px', // Increase padding inside each card
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Increase box shadow for a raised effect
         backgroundColor: '#f0f0f0', // Change background color
     };
@@ -23,13 +24,18 @@ const Chart = () => {
 
     // Use the userId parameter in your component logic
     return (
-        <div>
-            <div style={containerStyle}>
-                <div style={cardStyle}>
-                    <Highestmarks/>
-                </div>
+      <div>
+        <div style={containerStyle}>
+            <div style={{ ...cardStyle, marginRight: '10px' }}>
+                <Krishna />
             </div>
         </div>
+        <div style={containerStyle}>
+            <div style={{ ...cardStyle, marginRight: '10px' }}>
+                <Passfail />
+            </div>
+          </div>
+      </div>
     );
 };
 
