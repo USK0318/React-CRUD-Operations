@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import { useState, useEffect } from 'react';
 
 const Topper = () => {
   const [studentsData, setStudentsData] = useState([]);
@@ -29,26 +28,27 @@ const Topper = () => {
 
     fetchStudents();
   }, []);
+
   const options = {
     chart: {
-      type: 'bar',
+      type: 'line', // Set chart type to line
     },
     series: [
       {
         name: 'Marks',
         data: studentsData.map(student => student.marks),
-        colors: ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#546E7A', '#26a69a', '#D10CE8', '#F535AA'],
       },
     ],
     xaxis: {
       categories: studentsData.map(student => student.name),
     },
+    colors: ['#008FFB'], // Line color
   };
 
   return (
     <div>
-        <h2>Topper Chart</h2>
-      <Chart options={options} series={options.series} type="bar" height={400} />
+      <h2>Topper Chart </h2>
+      <Chart options={options} series={options.series} type="line" height={400} />
     </div>
   );
 };

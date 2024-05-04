@@ -106,10 +106,11 @@ def krishna_students(request):
     students = Students.objects.filter(roll=3)
     name=['english','maths','science','hindi','telugu']
     marks=[students[0].english,students[0].maths,students[0].science,students[0].hindi,students[0].telugu]
-    data = {
+    a = {
         "name": name,
         "marks": marks
     }  
+    data=[a]
     return Response(data)
 
 @api_view(['GET'])

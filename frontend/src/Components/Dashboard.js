@@ -1,10 +1,10 @@
 import React from 'react';
 import Telugu from '../Charts/Telugu';
 import Cities from '../Charts/Cities';
-import Krishna from '../Charts/Krishna';
 import Topper from '../Charts/Topper';
 import Highestmarks from '../Charts/Highestmarks';
 import Passfail from '../Charts/Passfail';
+import Krishna from '../Charts/Krishna';
 
 function Dashboard() {
   const containerStyle = {
@@ -41,13 +41,13 @@ function Dashboard() {
         <Cities />
       </div>
 
-      {/* Krishna Chart Card */}
-      <div style={cardStyle}>
-        <Krishna />
-      </div>
+      
       <div style={cardStyle}>
         <Passfail />
         </div>
+      <div style={cardStyle}>
+        <Krishna />
+      </div>
 
       {/* Topper Chart Card */}
       <div style={cardStyle}>

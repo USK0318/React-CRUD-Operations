@@ -7,36 +7,51 @@ const Krishna = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/krishna/');
+        const response = await fetch('http://127.0.0.1:8000/krishna');
         const data = await response.json();
-        setStudentsData(data);
+
+        // Assuming data is in the format you provided
+        const names = data[0].name;
+        const marks = data[0].marks;
+
+        // Transform the data into an array of objects
+        const transformedData = names.map((name, index) => ({
+          name: name,
+          marks: marks[index]
+        }));
+
+        setStudentsData(transformedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchStudents();
-  }, []);
+  }, []); // Empty dependency array to run effect only once after initial render
 
   const options = {
     chart: {
-      type: 'line', // Set chart type to 'line'
+      type: 'bar',
     },
     series: [
       {
-        name: 'Marks', // Series name
-        data: studentsData.marks || [], // Marks data from API response
+        name: 'Marks',
+        data: studentsData.map(student => student.marks),
       },
     ],
     xaxis: {
-      categories: studentsData.name || [], // Subject names as categories
+      categories: studentsData.map(student => student.name),
     },
   };
 
   return (
     <div>
       <h2>Krishna Chart</h2>
-      <Chart options={options} series={options.series} type="line" height={400} />
+      {studentsData.length > 0 ? (
+        <Chart options={options} series={options.series} type="bar" height={400} />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };

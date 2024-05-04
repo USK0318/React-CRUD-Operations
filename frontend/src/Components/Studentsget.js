@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit ,faChartPie } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-modal'; // Import a modal library
+import { Link } from 'react-router-dom';
 
 const Studentsget = () => {
   const [students, setStudents] = useState([]);
@@ -66,7 +67,6 @@ const Studentsget = () => {
           alert('Student updated successfully:', editedStudent.roll);
         } else {
           throw new Error('Failed to update student');
-          alert('Failed to update student');
         } 
       })
       .catch(error => console.error('Error updating student:', error));
@@ -119,11 +119,12 @@ const Studentsget = () => {
                 />
               </td>
               <td>
+              <Link key={student.roll} to={`/chart/${student.roll}`}>
                 <FontAwesomeIcon
                   icon={faChartPie}
-                  onClick={() => window.location.href = '/dashboard'}
                   style={{ cursor: 'pointer', color: 'green', marginLeft: '30px' }}
                 />
+              </Link>
               </td>
 
             </tr>

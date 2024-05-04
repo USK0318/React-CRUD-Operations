@@ -4,6 +4,7 @@ import './App.css';
 import Studentsget from './Components/Studentsget';
 import Studentspost from './Components/Studentspost';
 import Dashboard from './Components/Dashboard';
+import Chart from './Charts/Chart';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Studentsget />} />
         <Route path="/post" element={<Studentspost />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/chart/:userId" element={<Chart />} />
       </Routes>
       </div>
     </>
