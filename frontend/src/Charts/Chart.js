@@ -22,12 +22,11 @@ const Chart = () => {
 
     const { userId } = useParams(); // Get the userId parameter from the URL
 
-    // Use the userId parameter in your component logic
     return (
       <div>
         <div style={containerStyle}>
             <div style={{ ...cardStyle, marginRight: '10px' }}>
-                <Krishna />
+                <Krishna courseId={userId} />
             </div>
         </div>
         <div style={containerStyle}>

@@ -1,33 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
-const Krishna = () => {
+const Krishna = ({ courseId }) => {
   const [studentsData, setStudentsData] = useState([]);
+  const [myName, setMyName] = useState('');
+  const apiURL = `http://127.0.0.1:8000/krishna/${courseId}`;
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/krishna');
+        const response = await fetch(apiURL);
         const data = await response.json();
+        console.log('Fetched Data:', data);
 
-        // Assuming data is in the format you provided
-        const names = data[0].name;
-        const marks = data[0].marks;
+        if (data.length > 0) {
+          const { name, marks, myname } = data[0];
 
-        // Transform the data into an array of objects
-        const transformedData = names.map((name, index) => ({
-          name: name,
-          marks: marks[index]
-        }));
+          // Transform the data into an array of objects
+          const transformedData = name.map((name, index) => ({
+            name,
+            marks: marks[index],
+          }));
 
-        setStudentsData(transformedData);
+          setStudentsData(transformedData);
+          setMyName(myname); // Set the myName state
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchStudents();
-  }, []); // Empty dependency array to run effect only once after initial render
+  }, [apiURL]);
+
+  console.log('Students Data:', studentsData);
 
   const options = {
     chart: {
@@ -46,7 +52,7 @@ const Krishna = () => {
 
   return (
     <div>
-      <h2>Krishna Chart</h2>
+      <h2>Total Marks of {myName}</h2>
       {studentsData.length > 0 ? (
         <Chart options={options} series={options.series} type="bar" height={400} />
       ) : (

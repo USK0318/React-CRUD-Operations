@@ -102,13 +102,15 @@ def city_students(request):
 from .models import Students
 
 @api_view(['GET'])
-def krishna_students(request):
-    students = Students.objects.filter(roll=3)
+def krishna_students(request,pk):
+    students = Students.objects.filter(roll=pk)
+
     name=['english','maths','science','hindi','telugu']
     marks=[students[0].english,students[0].maths,students[0].science,students[0].hindi,students[0].telugu]
     a = {
         "name": name,
-        "marks": marks
+        "marks": marks,
+        "myname":students[0].name,
     }  
     data=[a]
     return Response(data)

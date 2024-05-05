@@ -26,6 +26,7 @@ function Dashboard() {
   return (
     <div style={containerStyle}>
       <h1 style={{ textAlign: 'center', width: '100%' }}>Students Dashboard</h1>
+      
       {/* Telugu Chart Card */}
       <div style={cardStyle}>
         <Telugu />
@@ -33,7 +34,6 @@ function Dashboard() {
 
       {/* Highest Marks Chart Card */}
       <div style={cardStyle}>
-      <h2>Highestmarks Chart</h2>
         <Highestmarks />
       </div>
 
@@ -42,12 +42,15 @@ function Dashboard() {
         <Cities />
       </div>
 
-      
+      {/* Pass/Fail Chart Card */}
       <div style={cardStyle}>
         <Passfail />
-        </div>
+      </div>
+
+      {/* Krishna Chart Card with Input Parameter */}
       <div style={cardStyle}>
-        <Krishna />
+        {/* Pass the courseId as a prop to Krishna */}
+        <Krishna courseId="3" />
       </div>
 
       {/* Topper Chart Card */}
