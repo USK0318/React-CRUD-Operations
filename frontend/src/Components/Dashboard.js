@@ -36,15 +36,16 @@ function Dashboard() {
       <div style={cardStyle}>
         <Highestmarks />
       </div>
+      
+      {/* Pass/Fail Chart Card */}
+      <div style={cardStyle}>
+        <Passfail />
+      </div>
+
 
       {/* Cities Chart Card */}
       <div style={cardStyle}>
         <Cities />
-      </div>
-
-      {/* Pass/Fail Chart Card */}
-      <div style={cardStyle}>
-        <Passfail />
       </div>
 
       {/* Krishna Chart Card with Input Parameter */}
