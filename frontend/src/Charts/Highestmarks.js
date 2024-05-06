@@ -48,6 +48,7 @@ const Highestmarks = () => {
 
     return (
         <div>
+          <h2>Highest Marks Chart </h2>
             <Chart options={options} series={options.series} type="bar" height={400} />
         </div>
     );
