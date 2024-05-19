@@ -4,30 +4,28 @@ import { faTrash, faEdit ,faChartPie } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-modal'; // Import a modal library
 import { Link } from 'react-router-dom';
 
-const Studentsget = () => {
+const Studentsget = ( {baseUrl}) => {
   const [students, setStudents] = useState([]);
   const [editedStudent, setEditedStudent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Function to fetch students data
   const fetchStudents = () => {
-
-    fetch('http://127.0.0.1:8000/studentsget/')
+    fetch(`${baseUrl}/studentsget/`)
       .then(response => response.json())
-      .then(data => setStudents(data))
+      .then(data => setStudents(data)) 
       .catch(error => console.error('Error fetching data:', error));
   };
 
   useEffect(() => {
     fetchStudents();
-  }, []); // Fetch data on component mount
+  }, []); 
 
   const handleDelete = (roll) => {
     const shouldDelete = window.confirm('Are you sure you want to delete this student?');
     
     if (shouldDelete) {
-      fetch(`http://127.0.0.1:8000/studentdelete/${roll}/`, {
-        method: 'DELETE',
+      fetch(`${baseUrl}/studentdelete/${roll}/`, {
+        method: 'DELETE', 
       })
         .then(response => {
           if (response.ok) {
@@ -52,7 +50,7 @@ const Studentsget = () => {
   };
 
   const saveEditedData = () => {
-    fetch(`http://127.0.0.1:8000/studentedit/${editedStudent.roll}/`, {
+    fetch(`${baseUrl}/studentedit/${editedStudent.roll}/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -161,6 +159,23 @@ const Studentsget = () => {
         onClick={() => window.location.href = '/dashboard'}
       >
         Dashboard
+      </button>
+
+      <button
+        style={{
+          marginTop: '20px',
+          marginLeft: '50px',
+          padding: '10px',
+          fontSize: '16px',
+          cursor: 'pointer',
+          backgroundColor: 'green',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px'
+        }}
+        onClick={() => window.location.href = '/staffinfo'}
+      >
+        Staff info
       </button>
 
       <Modal isOpen={isModalOpen} onRequestClose={closeModal}>

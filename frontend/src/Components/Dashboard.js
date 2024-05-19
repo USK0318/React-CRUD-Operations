@@ -6,7 +6,7 @@ import Highestmarks from '../Charts/Highestmarks';
 import Passfail from '../Charts/Passfail';
 import Krishna from '../Charts/Krishna';
 
-function Dashboard() {
+function Dashboard({ BASE_URL}) {
   const containerStyle = {
     display: 'flex',
     justifyContent: 'space-between', // Adjust as needed (e.g., 'space-around', 'center')
@@ -29,34 +29,34 @@ function Dashboard() {
       
       {/* Telugu Chart Card */}
       <div style={cardStyle}>
-        <Telugu />
+        <Telugu baseUrl={BASE_URL}/>
       </div>
 
       {/* Highest Marks Chart Card */}
       <div style={cardStyle}>
-        <Highestmarks />
+        <Highestmarks baseUrl={BASE_URL}/>
       </div>
       
       {/* Pass/Fail Chart Card */}
       <div style={cardStyle}>
-        <Passfail />
+        <Passfail baseUrl={BASE_URL}/>
       </div>
 
 
       {/* Cities Chart Card */}
       <div style={cardStyle}>
-        <Cities />
+        <Cities baseUrl={BASE_URL}/>
       </div>
 
       {/* Krishna Chart Card with Input Parameter */}
       <div style={cardStyle}>
         {/* Pass the courseId as a prop to Krishna */}
-        <Krishna courseId="3" />
+        <Krishna courseId="3" baseUrl={BASE_URL} />
       </div>
 
       {/* Topper Chart Card */}
       <div style={cardStyle}>
-        <Topper />
+        <Topper baseUrl={BASE_URL}/>
       </div>
     </div>
   );

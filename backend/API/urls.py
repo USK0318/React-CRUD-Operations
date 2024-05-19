@@ -12,4 +12,6 @@ urlpatterns = [
     path('krishna/<int:pk>', views.krishna_students),
     path('topper/', views.topper),
     path('fail/', views.fail),
+    path('poststaff/', views.post_staff),
+    path('staffget/', views.staff_get),
 ]

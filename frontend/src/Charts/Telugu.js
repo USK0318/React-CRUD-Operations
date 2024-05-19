@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
-const Telugu = () => {
+const Telugu = (
+  { baseUrl }
+) => {
   const [studentsData, setStudentsData] = useState([]);
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/telugustudents');
+        const response = await fetch(`${baseUrl}/telugustudents`);
         const data = await response.json();
 
         // Assuming data is in the format you provided

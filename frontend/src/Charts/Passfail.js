@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
-const PassFail = () => {
+const PassFail = ({
+  baseUrl
+}) => {
   const [passFailData, setPassFailData] = useState([]);
 
   useEffect(() => {
     const fetchPassFailData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/fail/');
+        const response = await fetch(`${baseUrl}/fail/`);
         const data = await response.json();
 
         // Assuming the API response is like { "pass": [5, 2] }

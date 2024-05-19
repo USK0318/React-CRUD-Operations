@@ -1,110 +1,164 @@
 import { useState } from 'react';
+import { TextField, Button, Card, CardContent, Typography, Container, Grid } from '@mui/material';
 import axios from "axios";
 
-function First(){
-    const [roll,setroll]=useState(0);
-    const [name,setname]=useState('');
-    const [fname,setfname]=useState('');
-    const [eng,seteng]=useState(0);
-    const [math,setmath]=useState(0);
-    const [sci,setsci]=useState(0);
-    const [hin,sethin]=useState(0);
-    const [tel,settel]=useState(0);
-    const [city,setcity]=useState('');
+function First({ baseUrl }) {
+    const [roll, setRoll] = useState('');
+    const [name, setName] = useState('');
+    const [fname, setFname] = useState('');
+    const [eng, setEng] = useState('');
+    const [math, setMath] = useState('');
+    const [sci, setSci] = useState('');
+    const [hin, setHin] = useState('');
+    const [tel, setTel] = useState('');
+    const [city, setCity] = useState('');
 
-    function postdata(event){
-        axios.post('http://127.0.0.1:8000/studentpost/',[{
-            roll: roll,
+    const handleInputChange = (event, setterFunction) => {
+        setterFunction(event.target.value);
+    };
+
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+        
+        // Parse numeric values as integers
+        const formData = [{
+            roll: parseInt(roll),
             name: name,
             father_name: fname,
-            english: eng,
-            maths: math,
-            science: sci,
-            hindi: hin,
-            telugu: tel,
-            city:city
-        }]).then(
-            (rep)=>{console.log(rep)
-            alert('Data submitted successfully!');}
-        ).catch((er)=>{console.log(er)
-        alert('Data not submitted!');
-    })
-}
-    return(
-        <div>
-            
-            <div style={{ maxWidth: '400px', margin: '0 auto', backgroundColor: '#f7f7f7', padding: '20px', borderRadius: '8px' }}>
-                <form onSubmit={postdata}>
-                <h2 style={{textAlign:'center'}} >Enter your Details</h2>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>Roll No</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{setroll(e.target.value)}}/>
-                    </div>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>Name</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{setname(e.target.value)}}/>
-                    </div>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>Father Name</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{setfname(e.target.value)}}/>
-                    </div>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>English</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{seteng(e.target.value)}}/>
-                    </div>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>Math</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{setmath(e.target.value)}}/>
-                    </div>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>Science</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{setsci(e.target.value)}}/>
-                    </div>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>Hindi</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{sethin(e.target.value)}}/>
-                    </div>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>Telugu</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{settel(e.target.value)}}/>
-                    </div>
-                    <div style={inputContainer}>
-                        <label style={labelStyle}>City</label>
-                        <input type="text" style={inputStyle} onChange={(e)=>{setcity(e.target.value)}}/>
-                    </div>
-                    <button type="submit" style={submitButton}>Submit</button>
-      
-                </form>
-            </div>
-        </div>
-    )
+            english: parseInt(eng),
+            maths: parseInt(math),
+            science: parseInt(sci),
+            hindi: parseInt(hin),
+            telugu: parseInt(tel),
+            city: city
+        }];
+        console.log('Form Data:', formData); // Log the form data for debugging
+
+
+        axios.post(`${baseUrl}/studentpost/`, formData)
+            .then((response) => {
+                console.log(response);
+                alert('Data submitted successfully!');
+            })
+            .catch((error) => {
+                console.error('Error submitting data:', error);
+                alert('Data not submitted!');
+            });
+    };
+
+    return (
+        <Container maxWidth="sm">
+            <Card style={{ marginTop: '80px' }}>
+                <CardContent>
+                    <Typography variant="h5" align="center" gutterBottom>
+                        <b>Enter your Details</b>
+                    </Typography>
+                    <form onSubmit={handleSubmit}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Roll No"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={roll}
+                                    onChange={(e) => handleInputChange(e, setRoll)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Name"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={name}
+                                    onChange={(e) => handleInputChange(e, setName)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Father Name"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={fname}
+                                    onChange={(e) => handleInputChange(e, setFname)}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="English Marks"
+                                    variant="outlined"
+                                    fullWidth
+                                    type="number"
+                                    value={eng}
+                                    onChange={(e) => handleInputChange(e, setEng)}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Math Marks"
+                                    variant="outlined"
+                                    fullWidth
+                                    type="number"
+                                    value={math}
+                                    onChange={(e) => handleInputChange(e, setMath)}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Science Marks"
+                                    variant="outlined"
+                                    fullWidth
+                                    type="number"
+                                    value={sci}
+                                    onChange={(e) => handleInputChange(e, setSci)}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Hindi Marks"
+                                    variant="outlined"
+                                    fullWidth
+                                    type="number"
+                                    value={hin}
+                                    onChange={(e) => handleInputChange(e, setHin)}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    label="Telugu Marks"
+                                    variant="outlined"
+                                    fullWidth
+                                    type="number"
+                                    value={tel}
+                                    onChange={(e) => handleInputChange(e, setTel)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="City"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={city}
+                                    onChange={(e) => handleInputChange(e, setCity)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    fullWidth
+                                >
+                                    Submit
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </CardContent>
+            </Card>
+        </Container>
+    );
 }
 
 export default First;
-
-const inputContainer = {
-    marginBottom: '15px'
-};
-
-const labelStyle = {
-    display: 'block',
-    marginBottom: '5px',
-    fontWeight: 'bold'
-};
-
-const inputStyle = {
-    width: '100%',
-    padding: '8px',
-    fontSize: '16px',
-    border: '1px solid #ddd',
-    borderRadius: '4px'
-};
-
-const submitButton = {
-    backgroundColor: '#007bff',
-    color: '#fff',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer'
-};

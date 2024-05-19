@@ -2,13 +2,15 @@ import React from 'react';
 import Chart from 'react-apexcharts';
 import { useState, useEffect } from 'react';
 
-const Highestmarks = () => {
+const Highestmarks = (
+  { baseUrl }
+) => {
     const [studentsData, setStudentsData] = useState([]);
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/highmarks/');
+        const response = await fetch(`${baseUrl}/highmarks/`);
         const data = await response.json();
 
         // Assuming data is in the format you provided

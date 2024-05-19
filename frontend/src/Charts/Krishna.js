@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
-const Krishna = ({ courseId }) => {
+const Krishna = ({ courseId,baseUrl }) => {
   const [studentsData, setStudentsData] = useState([]);
   const [myName, setMyName] = useState('');
-  const apiURL = `http://127.0.0.1:8000/krishna/${courseId}`;
+  const apiURL = `${baseUrl}/krishna/${courseId}`;
 
   useEffect(() => {
     const fetchStudents = async () => {

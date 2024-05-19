@@ -4,7 +4,9 @@ from rest_framework.decorators import api_view
 from .models import *
 from .serializers import *
 from rest_framework import status
-
+import os
+from django.conf import settings
+from django.db import connection as db
 
 @api_view(['GET'])
 def students_get(request):
@@ -145,3 +147,44 @@ def fail(request):
     }
     output=data
     return Response(output)
+
+
+@api_view(['POST'])
+def post_staff(request):
+    if request.method == 'POST':
+        staff_id = request.data.get('staff_id')
+        name = request.data.get('name')
+        salary = request.data.get('salary')
+        department = request.data.get('department')
+        photo = request.FILES.get('photo')
+        
+        save_path = os.path.join(settings.BASE_DIR, 'media', 'staff_photos')
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
+
+        if photo:
+            photo_path = os.path.join(save_path, photo.name)
+            with open(photo_path, 'wb+') as destination:
+                for chunk in photo.chunks():
+                    destination.write(chunk)        
+
+        staff_data = [staff_id, name, salary, department, photo_path]
+        try:
+            import mysql.connector as db 
+            c=db.connect(username='root',password='20A25B0318',host='localhost') 
+            a=c.cursor() 
+            da= staff_data
+            cur='insert into sys.api_staff values(%s,%s,%s,%s,%s)' 
+            a.execute(cur,da) 
+            c.commit() 
+            a.close() 
+            c.close()
+            return Response(status=status.HTTP_200_OK)
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def staff_get(request):
+    staf=Staff.objects.all()
+    serializer=StaffSerializer(staf,many=True)
+    return Response(serializer.data)

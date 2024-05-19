@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Passfail from './Passfail';
 import Krishna from './Krishna';
 
-const Chart = () => {
+const Chart = ({ baseUrl }) => {
     const containerStyle = {
         display: 'flex',
         justifyContent: 'center', // Center align items horizontally
@@ -26,12 +26,12 @@ const Chart = () => {
       <div>
         <div style={containerStyle}>
             <div style={{ ...cardStyle, marginRight: '10px' }}>
-                <Krishna courseId={userId} />
+                <Krishna courseId={userId} baseUrl={baseUrl} />
             </div>
         </div>
         <div style={containerStyle}>
             <div style={{ ...cardStyle, marginRight: '10px' }}>
-                <Passfail />
+                <Passfail baseUrl={baseUrl} />
             </div>
           </div>
       </div>
