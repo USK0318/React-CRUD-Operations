@@ -14,4 +14,6 @@ urlpatterns = [
     path('fail/', views.fail),
     path('poststaff/', views.post_staff),
     path('staffget/', views.staff_get),
+    path('staffedit/<int:pk>/', views.staff_edit),
+    path('staffdelete/<int:pk>/', views.staff_delete),
 ]

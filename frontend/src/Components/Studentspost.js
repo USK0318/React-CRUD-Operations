@@ -41,6 +41,16 @@ function First({ baseUrl }) {
             .then((response) => {
                 console.log(response);
                 alert('Data submitted successfully!');
+                setRoll('');
+                setName('');
+                setFname('');
+                setEng('');
+                setMath('');
+                setSci('');
+                setHin('');
+                setTel('');
+                setCity('');
+                
             })
             .catch((error) => {
                 console.error('Error submitting data:', error);

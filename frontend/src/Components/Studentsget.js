@@ -108,19 +108,19 @@ const Studentsget = ( {baseUrl}) => {
                 <FontAwesomeIcon
                   icon={faEdit}
                   onClick={() => handleEdit(student)}
-                  style={{ cursor: 'pointer', color: 'blue' }}
+                  style={{ cursor: 'pointer', color: 'blue', fontSize: '20px',marginLeft: '10px'}}
                 />
                 <FontAwesomeIcon
                   icon={faTrash}
                   onClick={() => handleDelete(student.roll)}
-                  style={{ cursor: 'pointer', color: 'red', marginLeft: '10px' }}
+                  style={{ cursor: 'pointer', color: 'red', marginLeft: '10px',fontSize: '20px'}}
                 />
               </td>
               <td>
               <Link key={student.roll} to={`/chart/${student.roll}`}>
                 <FontAwesomeIcon
                   icon={faChartPie}
-                  style={{ cursor: 'pointer', color: 'green', marginLeft: '30px' }}
+                  style={{ cursor: 'pointer', color: 'green', marginLeft: '30px',fontSize: '22px'}}
                 />
               </Link>
               </td>

@@ -31,6 +31,33 @@ function Staff({ baseUrl }) {
       });
   }, [baseUrl]);
 
+  const handleDelete = (staffId) => {
+    const shouldDelete = window.confirm('Are you sure you want to delete this staff member?');
+    if (shouldDelete) {
+      fetch(`${baseUrl}/staffdelete/${staffId}/`, {
+        method: 'DELETE',
+      })
+        .then(response => {
+          if (response.ok) {
+            // Refresh the staff list after successful deletion
+            fetch(`${baseUrl}/staffget/`)
+              .then(response => response.json())
+              .then(data => {
+                const updatedData = data.map(staffMember => ({
+                  ...staffMember,
+                  photo: `${baseUrl}${staffMember.photo}`
+                }));
+                setStaffData(updatedData);
+              })
+              .catch(error => console.error('Error fetching data:', error));
+          } else {
+            throw new Error('Failed to delete');
+          }
+        })
+        .catch(error => console.error('Error deleting staff member:', error));
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -40,8 +67,10 @@ function Staff({ baseUrl }) {
   }
 
   return (
+    <div>
+      <h1 style={{ textAlign: 'center',marginTop:'70px'}}>Staff Details</h1>
     <div className="staff-table-container">
-      <h1 style={{ textAlign: 'center' }}>Staff Details</h1>
+      
       <table className="staff-table">
         <thead>
           <tr>
@@ -66,7 +95,7 @@ function Staff({ baseUrl }) {
               <td>{staffMember.stadd_id}</td>
               <td>{staffMember.name}</td>
               <td>{staffMember.department}</td>
-              <td>${staffMember.salary}</td>
+              <td>{staffMember.salary} ₹</td>
               <td>
                 <FontAwesomeIcon
                   icon={faEdit}
@@ -75,6 +104,7 @@ function Staff({ baseUrl }) {
                 <FontAwesomeIcon
                   icon={faTrash}
                   style={{ cursor: 'pointer', color: 'red', marginLeft: '10px' }}
+                  onClick={() => handleDelete(staffMember.stadd_id)} // Call handleDelete with staffId
                 />
               </td>
             </tr>
@@ -96,6 +126,7 @@ function Staff({ baseUrl }) {
       >
         Add Staff
       </button>
+    </div>
     </div>
   );
 }

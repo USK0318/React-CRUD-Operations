@@ -188,3 +188,53 @@ def staff_get(request):
     staf=Staff.objects.all()
     serializer=StaffSerializer(staf,many=True)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def staff_delete(request, pk):
+    try:
+        staff = Staff.objects.get(stadd_id=pk)
+        photo_path = staff.photo.path
+        if os.path.exists(photo_path):
+            os.remove(photo_path) 
+        staff.delete()
+        return Response(status=status.HTTP_200_OK)
+    except Exception:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT'])
+def staff_edit(request, pk):
+    if request.method == 'PUT':
+        staff_id = request.data.get('staff_id')
+        name = request.data.get('name')
+        salary = request.data.get('salary')
+        department = request.data.get('department')
+        photo = request.FILES.get('photo')
+    
+        data= Staff.objects.get(stadd_id=pk)
+        photo_paths = data.photo.path
+        if os.path.exists(photo_paths):
+            os.remove(photo_paths)
+
+        save_path = os.path.join(settings.BASE_DIR, 'media', 'staff_photos')
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
+        if photo:
+            photo_path = os.path.join(save_path, photo.name)
+            with open(photo_path, 'wb+') as destination:
+                for chunk in photo.chunks():
+                    destination.write(chunk)        
+        # COMPLATED UP TO HERE
+        staff_data = [staff_id, name, salary, department, photo_path]
+        try:
+            import mysql.connector as db 
+            c=db.connect(username='root',password='20A25B0318',host='localhost') 
+            a=c.cursor() 
+            da= staff_data
+            cur='insert into sys.api_staff values(%s,%s,%s,%s,%s)' 
+            a.execute(cur,da) 
+            c.commit() 
+            a.close() 
+            c.close()
+            return Response(status=status.HTTP_200_OK)
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
