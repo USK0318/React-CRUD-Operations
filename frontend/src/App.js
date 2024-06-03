@@ -7,6 +7,9 @@ import Dashboard from './Components/Dashboard';
 import Chart from './Charts/Chart';
 import Staffget from './Components/Staffget';
 import AddStaff from './Components/AddStaff';
+import Addquestion from './Components/Addquestion';
+import Viewqusten from './Components/Viewqusten';
+
 
 
 
@@ -24,6 +27,9 @@ function App() {
         <Route path="/chart/:userId" element={<Chart baseUrl={BASE_URL}/>} />
         <Route path='/staffinfo' element={<Staffget baseUrl={BASE_URL}/>} />
         <Route path='/stafpost' element={<AddStaff baseUrl={BASE_URL}/>} />
+        <Route path='/addqustions' element={<Addquestion baseUrl={BASE_URL} />} />
+        <Route path='/viewqustions' element={<Viewqusten baseUrl={BASE_URL} />} />
+
       </Routes>
       </div>
     </>
