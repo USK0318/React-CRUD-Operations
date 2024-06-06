@@ -9,6 +9,7 @@ import Staffget from './Components/Staffget';
 import AddStaff from './Components/AddStaff';
 import Addquestion from './Components/Addquestion';
 import Viewqusten from './Components/Viewqusten';
+import Filters from './Components/Filters';
 
 
 
@@ -29,7 +30,7 @@ function App() {
         <Route path='/stafpost' element={<AddStaff baseUrl={BASE_URL}/>} />
         <Route path='/addqustions' element={<Addquestion baseUrl={BASE_URL} />} />
         <Route path='/viewqustions' element={<Viewqusten baseUrl={BASE_URL} />} />
-
+        <Route path='/filters' element={<Filters baseUrl={BASE_URL} />} />
       </Routes>
       </div>
     </>

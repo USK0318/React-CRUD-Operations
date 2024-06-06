@@ -16,4 +16,6 @@ urlpatterns = [
     path('staffget/', views.staff_get),
     path('staffedit/<int:pk>/', views.staff_edit),
     path('staffdelete/<int:pk>/', views.staff_delete),
+    path('get_all_products/', views.get_all_products),
+
 ]

@@ -210,6 +210,22 @@ const Studentsget = ( {baseUrl}) => {
       >
         view qustions
       </button>
+      <button
+        style={{
+          marginTop: '20px',
+          marginLeft: '50px',
+          padding: '10px',
+          fontSize: '16px',
+          cursor: 'pointer',
+          backgroundColor: 'green',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px'
+        }}
+        onClick={() => window.location.href = '/filters'}
+      >
+        Filters
+      </button>
 
       <Modal isOpen={isModalOpen} onRequestClose={closeModal}>
   {editedStudent && (

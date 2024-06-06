@@ -7,6 +7,7 @@ from rest_framework import status
 import os
 from django.conf import settings
 from django.db import connection as db
+from django.db import connection
 
 @api_view(['GET'])
 def students_get(request):
@@ -212,3 +213,15 @@ def staff_edit(request, pk):
         return Response(serializer.data)
     except Exception:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_all_products(request):
+    with connection.cursor() as cursor:
+        cursor.callproc('GetAllProducts')
+        columns = [col[0] for col in cursor.description]
+        products = [
+            dict(zip(columns, row))
+            for row in cursor.fetchall()
+        ]
+    return Response(products)
+
